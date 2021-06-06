@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 //GLOBAL
 var arrList = [0.0]
+//items in CoreData
 var items:[Person]?
 
 

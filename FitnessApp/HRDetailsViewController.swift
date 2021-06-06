@@ -16,7 +16,7 @@ class HRDetailsViewController: UIViewController, ChartViewDelegate {
     var lineChart = LineChartView()
     @IBOutlet weak var lineChartView: LineChartView!
     
-    @IBAction func minus(_ sender: Any) {
+    @IBAction func updateChart(_ sender: Any) {
         setChart(dataPoints: xAxisLabels, values: yAxisValues)
         self.lineChartView.notifyDataSetChanged()
         viewDidLayoutSubviews()

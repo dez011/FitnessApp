@@ -10,6 +10,7 @@ import HealthKit
 import CoreData
 import UIKit
 
+//global variables
 struct MyVariables {
     static var HRVToText: String  = "Getting"
     static var HRToText:  String = "Getting"
