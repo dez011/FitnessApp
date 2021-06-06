@@ -24,7 +24,6 @@
 		88F65D602669624C000E5C19 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F65D5F2669624C000E5C19 /* HealthKit.framework */; };
 		88F65D672669672D000E5C19 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F65D652669672D000E5C19 /* Person+CoreDataClass.swift */; };
 		88F65D682669672D000E5C19 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F65D662669672D000E5C19 /* Person+CoreDataProperties.swift */; };
-		88F65D6A26698AE3000E5C19 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F65D6926698AE3000E5C19 /* CustomTableViewCell.swift */; };
 		AF4C2F09B82583A2D9B7B385 /* Pods_FitnessApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5AA18EBAB9EDE46A7C9CC37 /* Pods_FitnessApp.framework */; };
 		CD33192F453AD7C9A8216FD9 /* Pods_FitnessApp_FitnessAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58A61B3121293A0273DB194 /* Pods_FitnessApp_FitnessAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -75,7 +74,6 @@
 		88F65D5F2669624C000E5C19 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		88F65D652669672D000E5C19 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		88F65D662669672D000E5C19 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		88F65D6926698AE3000E5C19 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B58A61B3121293A0273DB194 /* Pods_FitnessApp_FitnessAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessApp_FitnessAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5AA18EBAB9EDE46A7C9CC37 /* Pods_FitnessApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitnessApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED63AAF1AE37786DFCD5F5C7 /* Pods-FitnessApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitnessApp.debug.xcconfig"; path = "Target Support Files/Pods-FitnessApp/Pods-FitnessApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				88F65D2726695CE4000E5C19 /* SceneDelegate.swift */,
 				88F65D2926695CE4000E5C19 /* ViewController.swift */,
 				88F65D2B26695CE4000E5C19 /* Main.storyboard */,
-				88F65D6926698AE3000E5C19 /* CustomTableViewCell.swift */,
 				88F65D5A26695F03000E5C19 /* HRDetailsViewController.swift */,
 				88F65D5826695EB4000E5C19 /* HRVDetailsViewController.swift */,
 				88F65D5C26695F20000E5C19 /* MyVariables.swift */,
@@ -443,7 +440,6 @@
 				88F65D5B26695F03000E5C19 /* HRDetailsViewController.swift in Sources */,
 				88F65D5926695EB4000E5C19 /* HRVDetailsViewController.swift in Sources */,
 				88F65D2A26695CE4000E5C19 /* ViewController.swift in Sources */,
-				88F65D6A26698AE3000E5C19 /* CustomTableViewCell.swift in Sources */,
 				88F65D5D26695F20000E5C19 /* MyVariables.swift in Sources */,
 				88F65D2626695CE4000E5C19 /* AppDelegate.swift in Sources */,
 				88F65D2826695CE4000E5C19 /* SceneDelegate.swift in Sources */,

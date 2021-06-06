@@ -46,7 +46,6 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
                 print("error")
                 
             }
-            //arrList.append(Double(i.hr))
            // print("printing i.hr")
             //print(i.hr)
 
@@ -115,10 +114,11 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
         fetch.sortDescriptors = [sort]
         fetch.fetchLimit = 1
         
-        let results = try! context.fetch(fetch) as![Person]
+        let results = try! context.fetch(fetch) as! [Person]
        // print("results \(results)")
         if(results.count > 0){
            // print("in first if")
+            
          //   //if(results[0].date != datestrfr){
            //     print("results[0] \(results[0])")
             //    print("in second if")
@@ -136,22 +136,10 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
              //   print(newPerson)
             //}
         //}else {
-          //  print("in else")
-           // newPerson.hrv = Int16(Double(MyVariables.HRVToText) ?? 0)
-           // newPerson.hr = Int16(Double(MyVariables.HRToText) ?? 0)
-            //newPerson.date = datestrfr
-           // newPerson.dateobj = self.dueDate
+          //  print("in else")}
+
         }
-        
-        
-        
-       
-      //  print("hrv to text")
-      //  print(MyVariables.HRVToText)
-      //  print("hr to text")
-      //  print(MyVariables.HRToText)
-      //  print(newPerson)
-        
+
         do{
             print("saved")
             try self.context.save()
@@ -180,11 +168,6 @@ extension HRVDetailsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "personcell")
-//        cell.textLabel?.text = String(MyVariables.people[indexPath.row].hr)
-//        cell.detailTextLabel?.text = String(MyVariables.people[indexPath.row].hrv)
-//        return cell
-
-        
         let person = items![indexPath.row]
         cell.textLabel?.text = String("hrv \(person.hrv)  \(person.date) ")
         cell.detailTextLabel?.text = String("hr \(person.hr)")

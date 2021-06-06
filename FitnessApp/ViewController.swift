@@ -11,7 +11,8 @@ import CoreData
 var HRVCONSTANT = 80
 
 class ViewController: UIViewController {
-    
+    let queue = DispatchQueue(label: "update")
+
     @IBOutlet weak var HRVLabel: UILabel!
     @IBOutlet weak var HRLabel: UILabel!
     @IBOutlet weak var stsLabel: UILabel!
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var reccomendationLabel: UILabel!
     
     func setSquare(x: Int){
+        queue.async {
+
         let screenSize: CGRect = UIScreen.main.bounds
         
         // get screen width.
@@ -41,7 +44,8 @@ class ViewController: UIViewController {
         
         // Create a CGRect object which is used to render a rectangle.
         let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
-        
+            DispatchQueue.main.async {
+
         // Create a UIView object which use above CGRect object.
         let greenView = UIView(frame: rectFrame)
         
@@ -51,123 +55,53 @@ class ViewController: UIViewController {
         // Add above UIView object as the main view's subview.
         self.view.addSubview(greenView)
  
- if x < HRVCONSTANT{
-     print("less than constant")
-     print(x)
-     print(HRVCONSTANT)
-     greenView.backgroundColor = UIColor.red
-     self.view.addSubview(greenView)
-    reccomendationLabel.text! = "Your HRV is below your average, Please consider taking it easy today."
- }
- if x > HRVCONSTANT{
-     print("greater than constant")
-     print(x)
-     print(HRVCONSTANT)
-     greenView.backgroundColor = UIColor.green
-     self.view.addSubview(greenView)
-    reccomendationLabel.text! = "Your HRV is above your average.  You are ready for any type of workout intensity."
+        //Set color bassed on HRV
+         if x < HRVCONSTANT{
+             print("less than constant")
+             print(x)
+             print(HRVCONSTANT)
+             greenView.backgroundColor = UIColor.red
+             self.view.addSubview(greenView)
+            self.reccomendationLabel.text! = "Your HRV is below your average, Please consider taking it easy today."
+         }
+         if x > HRVCONSTANT{
+             print("greater than constant")
+             print(x)
+             print(HRVCONSTANT)
+             greenView.backgroundColor = UIColor.green
+             self.view.addSubview(greenView)
+            self.reccomendationLabel.text! = "Your HRV is above your average.  You are ready for any type of workout intensity."
 
- }
- if x == HRVCONSTANT {
-     print("equal to constant")
-     print(x)
-     print(HRVCONSTANT)
-     greenView.backgroundColor = UIColor.gray
-     self.view.addSubview(greenView)
-    reccomendationLabel.text! = "Your HRV is within your average, You can workout at your normal intensity"
+         }
+         if x == HRVCONSTANT {
+             print("equal to constant")
+             print(x)
+             print(HRVCONSTANT)
+             greenView.backgroundColor = UIColor.gray
+             self.view.addSubview(greenView)
+            self.reccomendationLabel.text! = "Your HRV is within your average, You can workout at your normal intensity"
+         }
 
-
- }
-    }
-
-    @IBAction func getReccomendation(_ sender: UIButton) {
-        // get screen size object.
-               let screenSize: CGRect = UIScreen.main.bounds
-               
-               // get screen width.
-               let screenWidth = screenSize.width
-               
-               // get screen height.
-               let screenHeight = screenSize.height
-               
-               // the rectangle top left point x axis position.
-               let xPos = 100
-               
-               // the rectangle top left point y axis position.
-               let yPos = 300
-               
-               // the rectangle width.
-               let rectWidth = Int(screenWidth) - 2 * xPos
-               
-               // the rectangle height.
-               let rectHeight = Int(screenHeight) - 2 * yPos
-               
-               // Create a CGRect object which is used to render a rectangle.
-               let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
-               
-               // Create a UIView object which use above CGRect object.
-               let greenView = UIView(frame: rectFrame)
-               
-               // Set UIView background color.
-               greenView.backgroundColor = UIColor.white
-               
-               // Add above UIView object as the main view's subview.
-               self.view.addSubview(greenView)
-        
-        if Int(MyVariables.HRVToText) ?? 0 < HRVCONSTANT{
-            print("less than constant")
-            print(Int(MyVariables.HRVToText))
-            print(HRVCONSTANT)
-            greenView.backgroundColor = UIColor.red
-            self.view.addSubview(greenView)
-        }
-        if Int(MyVariables.HRVToText) ?? 0 > HRVCONSTANT{
-            print("greater than constant")
-            print(Int(MyVariables.HRVToText))
-            print(HRVCONSTANT)
-            greenView.backgroundColor = UIColor.green
-            self.view.addSubview(greenView)
-        }
-        if Int(MyVariables.HRVToText) ?? 0 == HRVCONSTANT {
-            print("equal to constant")
-            print(Int(MyVariables.HRVToText))
-            print(HRVCONSTANT)
-            greenView.backgroundColor = UIColor.gray
-            self.view.addSubview(greenView)
-
+            }
         }
     }
- 
-    
-    
-    
-    
-    
+
     @IBAction func GetDataButton(_ sender: Any) {
         
         stsLabel.text = ""
-        DispatchQueue.global().async {
-                 // do some stuf
-          
-
-            
-                DispatchQueue.main.async(execute: { [self] () -> Void in
+        //DispatchQueue.global().async {
+             //   DispatchQueue.main.async(execute: { [self] () -> Void in
                      stsLabel.text = ""
                     self.main()
+                    stsLabel.text = ""
+                   self.main2()
                     //usleep(18000)
-                })
-                    
+              //  })
+               // DispatchQueue.main.async(execute: { [self] () -> Void in
 
-                DispatchQueue.main.async(execute: { [self] () -> Void in
-                     stsLabel.text = ""
-                    self.main2()
-
-
-                
-                })
-             }
+              //  })
+           //  }
         updateLabels()
-        
     }
     
     func main(){
@@ -181,49 +115,10 @@ class ViewController: UIViewController {
         dayStrainScore()
     }
    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         authorizeHealthKit()
-        
-       /*
-        // get screen size object.
-               let screenSize: CGRect = UIScreen.main.bounds
-               
-               // get screen width.
-               let screenWidth = screenSize.width
-               
-               // get screen height.
-               let screenHeight = screenSize.height
-               
-               // the rectangle top left point x axis position.
-               let xPos = 100
-               
-               // the rectangle top left point y axis position.
-               let yPos = 300
-               
-               // the rectangle width.
-               let rectWidth = Int(screenWidth) - 2 * xPos
-               
-               // the rectangle height.
-               let rectHeight = Int(screenHeight) - 2 * yPos
-               
-               // Create a CGRect object which is used to render a rectangle.
-               let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
-               
-               // Create a UIView object which use above CGRect object.
-               let greenView = UIView(frame: rectFrame)
-               
-               // Set UIView background color.
-               greenView.backgroundColor = UIColor.white
-               
-               // Add above UIView object as the main view's subview.
-               self.view.addSubview(greenView)
-        */
-           
-    //self.HRVLabel.text = "\(String(describing: latestHRV))"
-
         // Do any additional setup after loading the view.
     }
 
@@ -233,18 +128,13 @@ class ViewController: UIViewController {
                             HKObjectType.quantityType(forIdentifier: .heartRate)!,
                             HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!])
         
-//        let read = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!,
-//                        HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!])
-//        let share = Set([HKObjectType.quantityType(forIdentifier: .heartRate)!])
-//
+
         MyVariables.healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
             if !success {
                 print("(0_0)")
-                // Handle the error here.
             }
             else {
                 print("granted")
-                //self.latestHRV()
             }
         }
     }
@@ -259,7 +149,6 @@ class ViewController: UIViewController {
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictEndDate)
         
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-
 
         let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: [sortDescriptor]) { (sample, result, error) in
             guard error == nil else {
@@ -278,8 +167,6 @@ class ViewController: UIViewController {
             let EndDate = dateFormator.string(from: data.endDate)
             print("StartDate \(StartDate) : EndDate \(EndDate)")
             self.dayStrainScore()
-
-
         }
         MyVariables.healthStore.execute(query)
         updateLabels()
@@ -315,9 +202,7 @@ class ViewController: UIViewController {
             let EndDate = dateFormator.string(from: data.endDate)
             print("StartDate \(StartDate) : EndDate \(EndDate)")
             self.dayStrainScore()
-
             self.setSquare(x: Int(latestHRV))
-            
         }
         MyVariables.healthStore.execute(query)
         updateLabels()
@@ -325,16 +210,17 @@ class ViewController: UIViewController {
     
     
     func updateLabels() {
-        
+       // DispatchQueue.main.async{
+        DispatchQueue.main.async {
+
         self.HRLabel.text! = MyVariables.HRToText
         self.HRVLabel.text! = MyVariables.HRVToText
         self.dayScoreLabel.text! = MyVariables.dayScoreText
-        
-        
+        //}
+        }
     }
     
-    
-    //right now im calling it before anything else, i need to call it after.
+
     func dayStrainScore(){
         let getHRLong = Double(MyVariables.HRToText) ?? 0
         let getHRVLong = Double(MyVariables.HRVToText) ?? 0
@@ -354,11 +240,6 @@ class ViewController: UIViewController {
         }
         self.updateLabels()
     }
-    
- 
-    
-    
-    
     
 
 }
