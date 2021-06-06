@@ -40,7 +40,11 @@ class HRDetailsViewController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         lineChart.delegate = self
-        HRDetailsLabel.text = MyVariables.HRToText
+        
+//        if MyVariables.HRToText != nil {
+//            
+//            HRDetailsLabel.text = MyVariables.HRToText
+//        }
         setChart(dataPoints: xAxisLabels, values: yAxisValues)
 
         //let person = Person(context: PersistenceService.context)

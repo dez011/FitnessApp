@@ -18,11 +18,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var dayScoreLabel: UILabel!
     @IBOutlet weak var reccomendationLabel: UILabel!
     
-    //var VCHRV = HRVDetailsViewController()
-    @IBAction func updateLabelsButton(_ sender: UIButton) {
-        self.updateLabels()
-        
-    }
     func setSquare(x: Int){
         let screenSize: CGRect = UIScreen.main.bounds
         
@@ -70,6 +65,8 @@ class ViewController: UIViewController {
      print(HRVCONSTANT)
      greenView.backgroundColor = UIColor.green
      self.view.addSubview(greenView)
+    reccomendationLabel.text! = "Your HRV is above your average.  You are ready for any type of workout intensity."
+
  }
  if x == HRVCONSTANT {
      print("equal to constant")
@@ -77,6 +74,8 @@ class ViewController: UIViewController {
      print(HRVCONSTANT)
      greenView.backgroundColor = UIColor.gray
      self.view.addSubview(greenView)
+    reccomendationLabel.text! = "Your HRV is within your average, You can workout at your normal intensity"
+
 
  }
     }

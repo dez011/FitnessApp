@@ -36,6 +36,8 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
     }
 
     @IBAction func loadChart(_ sender: UIButton) {
+        yAxisValues = []
+        xAxisLabels = []
         for i in items!{
             if items != nil{
                 yAxisValues.append(Double(i.hr))
