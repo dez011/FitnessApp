@@ -8,7 +8,8 @@
 import UIKit
 import CoreData
 //GLOBAL
-var arrList = [03]
+var arrList = [0.0]
+var items:[Person]?
 
 
 
@@ -21,7 +22,6 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //data for the table
-    var items:[Person]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,23 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
         
     }
 
+    @IBAction func loadChart(_ sender: UIButton) {
+        for i in items!{
+            if items != nil{
+                yAxisValues.append(Double(i.hr))
+                xAxisLabels.append(String(i.hr))
+            }else{
+                print("error")
+                
+            }
+            //arrList.append(Double(i.hr))
+           // print("printing i.hr")
+            //print(i.hr)
+
+        }
+    }
+    
+    
     func fetchPeople(){
         do {
             //fetch request
@@ -44,7 +61,23 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
             let pred = NSPredicate(format: "date CONTAINS %@", "")
             request.predicate = pred
             //change the argument to request in order to filter
-            self.items = try context.fetch(Person.fetchRequest())
+            items = try context.fetch(Person.fetchRequest())
+           // print("printing items")
+           // print(items as Any)
+            
+            /*for i in items!{
+                if items != nil{
+                    yAxisValues.append(Double(i.hr))
+                    xAxisLabels.append(String(i.hr))
+                }else{
+                    print("error")
+                    
+                }
+                //arrList.append(Double(i.hr))
+               // print("printing i.hr")
+                //print(i.hr)
+
+            }*/
             
             DispatchQueue.main.async{
                 self.tableView.reloadData()
@@ -54,26 +87,6 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
             
         }
     }
-
-    //doesnt work yet
-    func getData(){
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<Person>(entityName: "hr")
-        let sort = NSSortDescriptor(key: #keyPath(Person.date),ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        do{
-            self.items = try context.fetch(Person.fetchRequest())
-           // person = try context.fetch(fetchRequest)
-        }catch {
-            print("cannot fetch")
-        }
-        
-        
-    }
-    
-   
-    
 
     /*
     // MARK: - Navigation
@@ -101,23 +114,27 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
         fetch.fetchLimit = 1
         
         let results = try! context.fetch(fetch) as![Person]
-        print("results \(results)")
+       // print("results \(results)")
         if(results.count > 0){
-            print("in first if")
-            if(results[0].date != datestrfr){
-                print("results[0] \(results[0])")
-                print("in second if")
+           // print("in first if")
+         //   //if(results[0].date != datestrfr){
+           //     print("results[0] \(results[0])")
+            //    print("in second if")
+
                 newPerson.hrv = Int16(Double(MyVariables.HRVToText) ?? 0)
                 newPerson.hr = Int16(Double(MyVariables.HRToText) ?? 0)
                 newPerson.date = datestrfr
                 newPerson.dateobj = self.dueDate
-                arrList.append(Int(newPerson.hr))
-                xAxisLabels.append(String("8"))
+                arrList.append(Double(Int(newPerson.hr)))
+                xAxisLabels.append(String(newPerson.hr))
                 yAxisValues.append(Double(newPerson.hr))
-                print("arrListAppend \(arrList)")
-            }
-        }else {
-            print("in else")
+            //    print(yAxisValues)
+            //    print(xAxisLabels)
+             //   print("arrListAppend \(arrList)")
+             //   print(newPerson)
+            //}
+        //}else {
+          //  print("in else")
            // newPerson.hrv = Int16(Double(MyVariables.HRVToText) ?? 0)
            // newPerson.hr = Int16(Double(MyVariables.HRToText) ?? 0)
             //newPerson.date = datestrfr
@@ -127,11 +144,11 @@ class HRVDetailsViewController: UIViewController, UITableViewDelegate {
         
         
        
-        print("hrv to text")
-        print(MyVariables.HRVToText)
-        print("hr to text")
-        print(MyVariables.HRToText)
-        print(newPerson)
+      //  print("hrv to text")
+      //  print(MyVariables.HRVToText)
+      //  print("hr to text")
+      //  print(MyVariables.HRToText)
+      //  print(newPerson)
         
         do{
             print("saved")
@@ -156,7 +173,7 @@ extension HRVDetailsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        // return MyVariables.people.count
-        return self.items?.count ?? 0
+        return items?.count ?? 0
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
@@ -166,7 +183,7 @@ extension HRVDetailsViewController: UITableViewDataSource {
 //        return cell
 
         
-        let person = self.items![indexPath.row]
+        let person = items![indexPath.row]
         cell.textLabel?.text = String("hrv \(person.hrv)  \(person.date) ")
         cell.detailTextLabel?.text = String("hr \(person.hr)")
         return cell
@@ -177,7 +194,7 @@ extension HRVDetailsViewController: UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "Delete") {
             (action, view, completionHandler) in
             //what person to remove
-            let personToRemove = self.items![indexPath.row]
+            let personToRemove = items![indexPath.row]
             //reomove the person
             self.context.delete(personToRemove)
             //save changes

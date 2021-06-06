@@ -47,6 +47,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIb-tg-udu">
+                                <rect key="frame" x="98" y="166" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="LoadChart"/>
+                                <connections>
+                                    <action selector="loadChart:" destination="gNl-8p-KBH" eventType="touchUpInside" id="s50-TK-wsc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6qu-EP-1pa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -94,7 +102,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTF-yv-zrJ" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="20" y="384" width="374" height="429"/>
+                                <rect key="frame" x="20" y="384" width="374" height="363"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -209,13 +217,27 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc4-vU-bqv">
-                                <rect key="frame" x="161" y="610" width="93" height="30"/>
+                                <rect key="frame" x="149" y="610" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="updateLabels"/>
+                                <state key="normal" title="LoadDataToTable"/>
                                 <connections>
+                                    <action selector="getReccomendation:" destination="9d6-QV-0jc" eventType="touchUpInside" id="vFj-Qo-hAV"/>
                                     <action selector="updateLabelsButton:" destination="9d6-QV-0jc" eventType="touchUpInside" id="o9f-FU-y0g"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIm-fY-0yk">
+                                <rect key="frame" x="103" y="554" width="208" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Label">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YPH-7u-2eh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -226,12 +248,13 @@
                         <outlet property="HRLabel" destination="AtA-SG-VZr" id="GXo-sp-1nL"/>
                         <outlet property="HRVLabel" destination="35C-1H-LLJ" id="A8z-wC-9fk"/>
                         <outlet property="dayScoreLabel" destination="u9B-Iz-dyL" id="M7w-VU-9T6"/>
+                        <outlet property="reccomendationLabel" destination="TIm-fY-0yk" id="e8M-aE-zvW"/>
                         <outlet property="stsLabel" destination="WsW-rQ-ZeH" id="e26-Ex-EKm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtQ-zd-6KL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1556" y="-172"/>
+            <point key="canvasLocation" x="1555.072463768116" y="-172.09821428571428"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0gW-v1-Thc">

@@ -8,7 +8,7 @@
 import UIKit
 import HealthKit
 import CoreData
-
+var HRVCONSTANT = 80
 
 class ViewController: UIViewController {
     
@@ -16,13 +16,132 @@ class ViewController: UIViewController {
     @IBOutlet weak var HRLabel: UILabel!
     @IBOutlet weak var stsLabel: UILabel!
     @IBOutlet weak var dayScoreLabel: UILabel!
+    @IBOutlet weak var reccomendationLabel: UILabel!
     
     //var VCHRV = HRVDetailsViewController()
     @IBAction func updateLabelsButton(_ sender: UIButton) {
         self.updateLabels()
         
     }
+    func setSquare(x: Int){
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        // get screen width.
+        let screenWidth = screenSize.width
+        
+        // get screen height.
+        let screenHeight = screenSize.height
+        
+        // the rectangle top left point x axis position.
+        let xPos = 100
+        
+        // the rectangle top left point y axis position.
+        let yPos = 300
+        
+        // the rectangle width.
+        let rectWidth = Int(screenWidth) - 2 * xPos
+        
+        // the rectangle height.
+        let rectHeight = Int(screenHeight) - 2 * yPos
+        
+        // Create a CGRect object which is used to render a rectangle.
+        let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
+        
+        // Create a UIView object which use above CGRect object.
+        let greenView = UIView(frame: rectFrame)
+        
+        // Set UIView background color.
+        greenView.backgroundColor = UIColor.white
+        
+        // Add above UIView object as the main view's subview.
+        self.view.addSubview(greenView)
+ 
+ if x < HRVCONSTANT{
+     print("less than constant")
+     print(x)
+     print(HRVCONSTANT)
+     greenView.backgroundColor = UIColor.red
+     self.view.addSubview(greenView)
+    reccomendationLabel.text! = "Your HRV is below your average, Please consider taking it easy today."
+ }
+ if x > HRVCONSTANT{
+     print("greater than constant")
+     print(x)
+     print(HRVCONSTANT)
+     greenView.backgroundColor = UIColor.green
+     self.view.addSubview(greenView)
+ }
+ if x == HRVCONSTANT {
+     print("equal to constant")
+     print(x)
+     print(HRVCONSTANT)
+     greenView.backgroundColor = UIColor.gray
+     self.view.addSubview(greenView)
 
+ }
+    }
+
+    @IBAction func getReccomendation(_ sender: UIButton) {
+        // get screen size object.
+               let screenSize: CGRect = UIScreen.main.bounds
+               
+               // get screen width.
+               let screenWidth = screenSize.width
+               
+               // get screen height.
+               let screenHeight = screenSize.height
+               
+               // the rectangle top left point x axis position.
+               let xPos = 100
+               
+               // the rectangle top left point y axis position.
+               let yPos = 300
+               
+               // the rectangle width.
+               let rectWidth = Int(screenWidth) - 2 * xPos
+               
+               // the rectangle height.
+               let rectHeight = Int(screenHeight) - 2 * yPos
+               
+               // Create a CGRect object which is used to render a rectangle.
+               let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
+               
+               // Create a UIView object which use above CGRect object.
+               let greenView = UIView(frame: rectFrame)
+               
+               // Set UIView background color.
+               greenView.backgroundColor = UIColor.white
+               
+               // Add above UIView object as the main view's subview.
+               self.view.addSubview(greenView)
+        
+        if Int(MyVariables.HRVToText) ?? 0 < HRVCONSTANT{
+            print("less than constant")
+            print(Int(MyVariables.HRVToText))
+            print(HRVCONSTANT)
+            greenView.backgroundColor = UIColor.red
+            self.view.addSubview(greenView)
+        }
+        if Int(MyVariables.HRVToText) ?? 0 > HRVCONSTANT{
+            print("greater than constant")
+            print(Int(MyVariables.HRVToText))
+            print(HRVCONSTANT)
+            greenView.backgroundColor = UIColor.green
+            self.view.addSubview(greenView)
+        }
+        if Int(MyVariables.HRVToText) ?? 0 == HRVCONSTANT {
+            print("equal to constant")
+            print(Int(MyVariables.HRVToText))
+            print(HRVCONSTANT)
+            greenView.backgroundColor = UIColor.gray
+            self.view.addSubview(greenView)
+
+        }
+    }
+ 
+    
+    
+    
     
     
     @IBAction func GetDataButton(_ sender: Any) {
@@ -68,7 +187,43 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         authorizeHealthKit()
-        //self.HRVLabel.text = "\(String(describing: latestHRV))"
+        
+       /*
+        // get screen size object.
+               let screenSize: CGRect = UIScreen.main.bounds
+               
+               // get screen width.
+               let screenWidth = screenSize.width
+               
+               // get screen height.
+               let screenHeight = screenSize.height
+               
+               // the rectangle top left point x axis position.
+               let xPos = 100
+               
+               // the rectangle top left point y axis position.
+               let yPos = 300
+               
+               // the rectangle width.
+               let rectWidth = Int(screenWidth) - 2 * xPos
+               
+               // the rectangle height.
+               let rectHeight = Int(screenHeight) - 2 * yPos
+               
+               // Create a CGRect object which is used to render a rectangle.
+               let rectFrame: CGRect = CGRect(x:CGFloat(xPos), y:CGFloat(yPos), width:CGFloat(rectWidth), height:CGFloat(rectHeight))
+               
+               // Create a UIView object which use above CGRect object.
+               let greenView = UIView(frame: rectFrame)
+               
+               // Set UIView background color.
+               greenView.backgroundColor = UIColor.white
+               
+               // Add above UIView object as the main view's subview.
+               self.view.addSubview(greenView)
+        */
+           
+    //self.HRVLabel.text = "\(String(describing: latestHRV))"
 
         // Do any additional setup after loading the view.
     }
@@ -162,7 +317,7 @@ class ViewController: UIViewController {
             print("StartDate \(StartDate) : EndDate \(EndDate)")
             self.dayStrainScore()
 
-
+            self.setSquare(x: Int(latestHRV))
             
         }
         MyVariables.healthStore.execute(query)
@@ -175,6 +330,7 @@ class ViewController: UIViewController {
         self.HRLabel.text! = MyVariables.HRToText
         self.HRVLabel.text! = MyVariables.HRVToText
         self.dayScoreLabel.text! = MyVariables.dayScoreText
+        
         
     }
     

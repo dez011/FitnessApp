@@ -7,23 +7,32 @@
 
 import UIKit
 import Charts
-var xAxisLabels = ["1", "2", "3", "4", "5", "6","7"]
-var yAxisValues = [50.0, 25.0, 50.0, 75.0, 100.0, 75.0,0.0]
+var xAxisLabels = ["1"]
+var yAxisValues = [0.0]
 
 class HRDetailsViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var HRDetailsLabel: UILabel!
     @IBOutlet weak var fromPersistence: UILabel!
     var lineChart = LineChartView()
-    
     @IBOutlet weak var lineChartView: LineChartView!
     
     
     @IBAction func minus(_ sender: Any) {
-        xAxisLabels.append("8")
-        yAxisValues.append(25.0)
+        //xAxisLabels.append("8")
+        //yAxisValues.append(25.0)
         //setChart(dataPoints: [String], values: [Double])
+        setChart(dataPoints: xAxisLabels, values: yAxisValues)
+        self.lineChartView.notifyDataSetChanged()
         viewDidLayoutSubviews()
-
+//        if items != nil{
+//        for i in items!{
+//            yAxisValues.append(Double(i.hr))
+//            xAxisLabels.append(String(i.hr))
+//        }
+//        }else{
+//            print("error")
+//            
+//        }
     }
     
     
